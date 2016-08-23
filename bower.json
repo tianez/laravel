@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "font-awesome": "^4.6.3",
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    "weui": "^0.4.3"
   }
 }
