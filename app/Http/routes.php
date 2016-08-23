@@ -12,7 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $img = Image::make('storage/app/2.jpg')->resize(300, 200);
+       return $img->response('jpg');
+    // return view('welcome');
 });
 
 /*
