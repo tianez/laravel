@@ -10,12 +10,8 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::get('/', function () {
-    $img = Image::make('storage/app/2.jpg')->resize(300, 200);
-       return $img->response('jpg');
-    // return view('welcome');
-});
+Route::get('/', 'HomeController@index');
+Route::get('login', 'HomeController@login');
 
 /*
 |--------------------------------------------------------------------------

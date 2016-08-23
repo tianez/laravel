@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,6 +12,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserTableSeeder::class);
+        date_default_timezone_set("Asia/Shanghai");
+        $this->call(UserTableSeeder::class);
+        $this->call(RoleTableSeeder::class);
     }
 }
