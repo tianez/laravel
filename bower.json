@@ -18,6 +18,9 @@
   "dependencies": {
     "font-awesome": "^4.6.3",
     "bootstrap": "^3.3.7",
-    "weui": "^0.4.3"
+    "weui": "^0.4.3",
+    "pure": "^0.6.0",
+    "storedb": "^0.1.2",
+    "animate.css": "^3.5.2"
   }
 }

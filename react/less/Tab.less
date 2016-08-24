@@ -1,0 +1,55 @@
+.tab {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    height: 600px;
+    overflow: hidden;
+    background: #eee;
+    margin: 0 auto;
+    .active {
+        color: #f00;
+    }
+    .tab-cards2 {
+        position: relative;
+        background: #fff;
+        height: 200px;
+        .tab-card2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            display: block;
+            background: #f00;
+            z-index: 1;
+            line-height: 200px;
+            font-size: 36px;
+            text-align: center;
+            transition: all .3s;
+            .p {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 40px;
+                line-height: 40px;
+                color: #fff;
+                font-size: 18px;
+                text-align: center;
+                background: rgba(0, 0, 0, .5);
+            }
+        }
+        .dot {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            padding: 0 1.5rem;
+            font-size: 1.6rem;
+            line-height: 40px;
+            color: #fff;
+            height: 40px;
+            z-index: 99;
+        }
+    }
+}
