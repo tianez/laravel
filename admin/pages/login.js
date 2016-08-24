@@ -13,7 +13,7 @@ class Login extends React.Component {
         super(props)
         this.state = {
             info: {
-                username: 'tianez',
+                username: 'tianez2',
                 password: '123456'
             }
         }
@@ -26,20 +26,19 @@ class Login extends React.Component {
         })
     }
     _onSubmit(e) {
-        // e.preventDefault();
-        // request
-        //     .post('http://www.mycms.com/login2')
-        //     .send(this.state.info)
-        //     .set('Accept', 'application/json')
-        //     .set('Cookie', 'usern=tianez')
-        //     .end(function(err, res) {
-        //         if (err) throw err
-        //         console.log(res);
-        //         let data = JSON.parse(res.text)
-        //         console.log(res);
-        //         storedb('user').insert(data)
-        //         this.props.history.pushState(null, '/')
-        //     }.bind(this))
+        e.preventDefault();
+        request
+            .post('login')
+            .send(this.state.info)
+            .set('Accept', 'application/json')
+            .end(function(err, res) {
+                if (err) throw err
+                console.log(res);
+                let data = JSON.parse(res.text)
+                console.log(res);
+                storedb('user').insert(data)
+                this.props.history.pushState(null, '/')
+            }.bind(this))
         storedb('user').insert(e)
         this.props.history.pushState(null, '/')
     }
@@ -66,7 +65,7 @@ class Login extends React.Component {
                     React.createElement(Form, {
                         action: 'user/login',
                         info: this.state.info,
-                        // apiSubmit: false,
+                        apiSubmit: false,
                         legend: '用户登录',
                         onSubmit: this._onSubmit.bind(this)
                     },
@@ -74,7 +73,7 @@ class Login extends React.Component {
                             type: 'text',
                             title: '用户名',
                             name: 'username',
-                            placeholder: 'username',
+                            placeholder: '请输入您的用户名！',
                             value: this.state.info.username,
                             onChange: this._onChange.bind(this)
                         }),
@@ -82,7 +81,7 @@ class Login extends React.Component {
                             type: 'password',
                             title: '密码',
                             name: 'password',
-                            placeholder: 'password',
+                            placeholder: '请输入您的密码！',
                             value: this.state.info.password,
                             onChange: this._onChange.bind(this)
                         }),

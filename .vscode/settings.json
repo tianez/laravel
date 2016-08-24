@@ -17,6 +17,15 @@
         "tests": true,
         ".htaccess": true,
         "composer.phar": true,
-        "vendor": true
+        "vendor": true,
+        "storage": true,
+        "database":true,
+        "app/Console":true,
+        "app/Exceptions":true,
+        "app/Policies":true,
+        "app/Listeners":true,
+        "app/Jobs":true,
+        "app/Events":true,
+        "bootstrap":true
     }
 }

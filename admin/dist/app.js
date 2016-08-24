@@ -49,27 +49,6 @@
 	// const ReactDOM = require('react-dom');
 	// const ReactRouter = require('react-router');
 	// import './less/style.less' //webpack编译时导入
-	// function setCookie(c_name, value, expiredays) {
-	//     var exdate = new Date()
-	//     exdate.setDate(exdate.getDate() + expiredays)
-	//     document.cookie = c_name + "=" + escape(value) +
-	//         ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString())
-	// }
-	//
-	// function getCookie(c_name) {
-	//     if (document.cookie.length > 0) {
-	//         c_start = document.cookie.indexOf(c_name + "=")
-	//         if (c_start != -1) {
-	//             c_start = c_start + c_name.length + 1
-	//             c_end = document.cookie.indexOf(";", c_start)
-	//             if (c_end == -1) c_end = document.cookie.length
-	//             return unescape(document.cookie.substring(c_start, c_end))
-	//         }
-	//     }
-	//     return "987"
-	// }
-	// setCookie('PHPSESSID','12322323');
-	// console.log(getCookie('PHPSESSID'));
 
 	var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 	var _ReactRouter = ReactRouter;
@@ -97,7 +76,6 @@
 
 
 	__webpack_require__(121);
-	// require('./html/IndexedDB')
 
 	function onEnter(nextState, replace) {
 	    var pathname = nextState.location.pathname;
@@ -2500,6 +2478,7 @@
 	            return;
 	        }
 	        console.log(this.props.info);
+	        console.log(this.props.apiSubmit);
 	        if (this.props.apiSubmit) {
 	            Apicloud.post(this.props.action, this.props.info, function (err, res) {
 	                var data = JSON.parse(res.text);
@@ -23404,7 +23383,7 @@
 
 	        _this.state = {
 	            info: {
-	                username: 'tianez',
+	                username: 'tianez2',
 	                password: '123456'
 	            }
 	        };
@@ -23423,20 +23402,15 @@
 	    }, {
 	        key: '_onSubmit',
 	        value: function _onSubmit(e) {
-	            // e.preventDefault();
-	            // request
-	            //     .post('http://www.mycms.com/login2')
-	            //     .send(this.state.info)
-	            //     .set('Accept', 'application/json')
-	            //     .set('Cookie', 'usern=tianez')
-	            //     .end(function(err, res) {
-	            //         if (err) throw err
-	            //         console.log(res);
-	            //         let data = JSON.parse(res.text)
-	            //         console.log(res);
-	            //         storedb('user').insert(data)
-	            //         this.props.history.pushState(null, '/')
-	            //     }.bind(this))
+	            e.preventDefault();
+	            request.post('login').send(this.state.info).set('Accept', 'application/json').end(function (err, res) {
+	                if (err) throw err;
+	                console.log(res);
+	                var data = JSON.parse(res.text);
+	                console.log(res);
+	                storedb('user').insert(data);
+	                this.props.history.pushState(null, '/');
+	            }.bind(this));
 	            storedb('user').insert(e);
 	            this.props.history.pushState(null, '/');
 	        }
@@ -23458,21 +23432,21 @@
 	            }, '登录')), React.createElement(Form, {
 	                action: 'user/login',
 	                info: this.state.info,
-	                // apiSubmit: false,
+	                apiSubmit: false,
 	                legend: '用户登录',
 	                onSubmit: this._onSubmit.bind(this)
 	            }, React.createElement(Input, {
 	                type: 'text',
 	                title: '用户名',
 	                name: 'username',
-	                placeholder: 'username',
+	                placeholder: '请输入您的用户名！',
 	                value: this.state.info.username,
 	                onChange: this._onChange.bind(this)
 	            }), React.createElement(Input, {
 	                type: 'password',
 	                title: '密码',
 	                name: 'password',
-	                placeholder: 'password',
+	                placeholder: '请输入您的密码！',
 	                value: this.state.info.password,
 	                onChange: this._onChange.bind(this)
 	            }), React.createElement(Button, {

@@ -2,9 +2,6 @@
 <html>
     <head>
         <title>Be right back.</title>
-
-        
-
         <style>
             html, body {
                 height: 100%;

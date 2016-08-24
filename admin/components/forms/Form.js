@@ -4,19 +4,20 @@ const Apicloud = require('../utils/Apicloud')
 const classNames = require('classNames')
 
 var Form = React.createClass({
-    getDefaultProps: function() {
+    getDefaultProps: function () {
         return {
             apiSubmit: true
         }
-    },
-    handleSubmit: function(e) {
+    }, 
+    handleSubmit: function (e) {
         e.preventDefault();
         if (this.props.locked) {
             return;
         }
-         console.log(this.props.info);
+        console.log(this.props.info);
+        console.log(this.props.apiSubmit);
         if (this.props.apiSubmit) {
-            Apicloud.post(this.props.action, this.props.info, function(err, res) {
+            Apicloud.post(this.props.action, this.props.info, function (err, res) {
                 let data = JSON.parse(res.text)
                 console.log(res);
                 if (data.error) {
@@ -29,17 +30,17 @@ var Form = React.createClass({
             this.props.onSubmit(e)
         }
     },
-    render: function() {
+    render: function () {
         return (
             React.createElement('form', {
-                    className: 'form-fields form-horizontal',
-                    role: 'form',
-                    // encType: 'multipart/form-data',
-                    onSubmit: this.handleSubmit
-                },
+                className: 'form-fields form-horizontal',
+                role: 'form',
+                // encType: 'multipart/form-data',
+                onSubmit: this.handleSubmit
+            },
                 React.createElement('fieldset', {
-                        className: 'form-fieldset'
-                    },
+                    className: 'form-fieldset'
+                },
                     React.createElement('legend', {
                         className: 'form-legend'
                     }, this.props.legend),
