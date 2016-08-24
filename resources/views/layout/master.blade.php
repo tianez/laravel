@@ -9,7 +9,7 @@
   <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="bower_components/animate.css/animate.css" rel="stylesheet">
   <link href="bower_components/weui/dist/style/weui.min.css" rel="stylesheet">
-  <link href="dist/style.map.css" rel="stylesheet">
+  <link href="react/dist/style.map.css" rel="stylesheet">
 </head>
 <style>
   body {

@@ -15,7 +15,6 @@ class HomeController extends Controller {
     
     public function index(Request $request) {
         $user = session('cur_user');
-        dump($user);
         if($user){
             $results = DB::table('report')->where('client_number', $user->client_number)->get();
             $res = array();
