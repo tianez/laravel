@@ -9,13 +9,13 @@
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="bower_components/pure/pure.css" />
     <link href="http://cdn.bootcss.com/draft-js/0.7.0/Draft.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="admin/dist/style.min.css" />
+    <link rel="stylesheet" href="admin/dist/style.map.css" />
 </head>
 
 <body>
     <div id="app"></div>
 
-    <script src="http://cdn.bootcss.com/react/15.1.0/react-with-addons.min.js"></script>
+    <script src="http://cdn.bootcss.com/react/15.1.0/react-with-addons.js"></script>
     <!--<script src="../resources/js/react.js"></script>-->
     <script src="resources/js/react-dom.js"></script>
     <script src="resources/js/ReactRouter.js"></script>

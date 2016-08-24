@@ -13,7 +13,7 @@ class Login extends React.Component {
         super(props)
         this.state = {
             info: {
-                username: 'tianez2',
+                username: 'tianez',
                 password: '123456'
             }
         }
@@ -31,16 +31,17 @@ class Login extends React.Component {
             .post('login')
             .send(this.state.info)
             .set('Accept', 'application/json')
-            .end(function(err, res) {
+            .end(function (err, res) {
                 if (err) throw err
-                console.log(res);
                 let data = JSON.parse(res.text)
-                console.log(res);
-                storedb('user').insert(data)
-                this.props.history.pushState(null, '/')
+                if (data.state == 'ok') {
+                    storedb('user').insert(data.data)
+                    this.props.history.pushState(null, '/')
+                } else {
+                    this.setState({ 'msg': data.msg })
+                    console.log(data)
+                }
             }.bind(this))
-        storedb('user').insert(e)
-        this.props.history.pushState(null, '/')
     }
     render() {
         return (
@@ -62,6 +63,9 @@ class Login extends React.Component {
                             title: '登录'
                         }, '登录')
                     ),
+                    this.state.msg ? React.createElement('div', {
+                        className:'alert alert-warning'
+                    }, this.state.msg) : null,
                     React.createElement(Form, {
                         action: 'user/login',
                         info: this.state.info,

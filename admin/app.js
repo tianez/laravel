@@ -4,7 +4,6 @@
 // const ReactRouter = require('react-router');
 // import './less/style.less' //webpack编译时导入
 
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup
 const {
     Router,
     Route,
@@ -26,7 +25,8 @@ const {
     Pages,
     Page,
     Login,
-    Logout
+    Logout,
+    Import
 } = require('./pages') 
 
 require('./pages/global')
@@ -34,7 +34,7 @@ require('./pages/global')
 function onEnter(nextState, replace) {
     let pathname = nextState.location.pathname
     let user = storedb('user').find() ? true : false
-    // console.log(storedb('user').find());
+    console.log(storedb('user').find());
     if (!user && pathname !== 'login' && pathname !== '/login') {
         ConfigActions.update('msg', '你还没有登录，请先登录！')
         replace({
@@ -61,6 +61,10 @@ const routers = (
             React.createElement(IndexRoute, {
                 component: Home,
                 onEnter: onEnter
+            }),
+            React.createElement(Route, {
+                path: "import",
+                component: Import
             }),
             React.createElement(Route, {
                 path: "drag",

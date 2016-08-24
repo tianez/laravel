@@ -21,6 +21,11 @@ function ajaxUpload(data) {
     var formData = new FormData();
     if (data.token !== null && data.token !== undefined) formData.append('token', data.token)
     if (data.key !== null && data.key !== undefined) formData.append('key', data.key)
+    if (data.data !== null && data.data !== undefined) {
+        for (let x in data.data) {
+            formData.append(x, data.data[x])
+        }
+    } 
     formData.append(data.name, data.file)
     var xhr = createCORSRequest('post', data.url, data.cors)
     xhr.withCredentials = data.withCredentials
@@ -31,6 +36,6 @@ function ajaxUpload(data) {
     return xhr
 }
 
-module.exports = function(args) {
+module.exports = function (args) {
     return ajaxUpload(args)
 }

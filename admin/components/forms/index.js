@@ -1,5 +1,6 @@
 'use strict'
 const Form = require('./Form')
+const FormGroup = require('./FormGroup')
 const Input = require('./Input')
 const Textarea = require('./Textarea')
 const Editer = require('../editer')
@@ -21,6 +22,7 @@ const Audio = require('./Audio')
 
 var Forms = {
     Form: Form,
+    FormGroup:FormGroup,
     Input: Input,
     Textarea: Textarea,
     Editer: Editer,

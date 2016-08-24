@@ -50,7 +50,6 @@
 	// const ReactRouter = require('react-router');
 	// import './less/style.less' //webpack编译时导入
 
-	var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 	var _ReactRouter = ReactRouter;
 	var Router = _ReactRouter.Router;
 	var Route = _ReactRouter.Route;
@@ -73,14 +72,15 @@
 	var Page = _require.Page;
 	var Login = _require.Login;
 	var Logout = _require.Logout;
+	var Import = _require.Import;
 
 
-	__webpack_require__(121);
+	__webpack_require__(122);
 
 	function onEnter(nextState, replace) {
 	    var pathname = nextState.location.pathname;
 	    var user = storedb('user').find() ? true : false;
-	    // console.log(storedb('user').find());
+	    console.log(storedb('user').find());
 	    if (!user && pathname !== 'login' && pathname !== '/login') {
 	        ConfigActions.update('msg', '你还没有登录，请先登录！');
 	        replace({
@@ -105,6 +105,9 @@
 	React.createElement(IndexRoute, {
 	    component: Home,
 	    onEnter: onEnter
+	}), React.createElement(Route, {
+	    path: "import",
+	    component: Import
 	}), React.createElement(Route, {
 	    path: "drag",
 	    component: Drag
@@ -168,6 +171,7 @@
 	var Page = __webpack_require__(118);
 	var Login = __webpack_require__(119);
 	var Logout = __webpack_require__(120);
+	var Import = __webpack_require__(121);
 
 	var Temp = {
 	    Layout: Layout,
@@ -182,7 +186,8 @@
 	    Pages: Pages,
 	    Page: Page,
 	    Login: Login,
-	    Logout: Logout
+	    Logout: Logout,
+	    Import: Import
 	};
 	module.exports = Temp;
 
@@ -2173,6 +2178,9 @@
 	            }, React.createElement(A, {
 	                to: 'drag',
 	                title: 'drag'
+	            }), React.createElement(A, {
+	                to: 'import',
+	                title: 'import'
 	            }), menus, menus2));
 	        }
 	    }]);
@@ -2415,7 +2423,8 @@
 	'use strict';
 
 	var Form = __webpack_require__(16);
-	var Input = __webpack_require__(19);
+	var FormGroup = __webpack_require__(19);
+	var Input = __webpack_require__(20);
 	var Textarea = __webpack_require__(21);
 	var Editer = __webpack_require__(22);
 	var Canvas = __webpack_require__(103);
@@ -2436,6 +2445,7 @@
 
 	var Forms = {
 	    Form: Form,
+	    FormGroup: FormGroup,
 	    Input: Input,
 	    Textarea: Textarea,
 	    Editer: Editer,
@@ -2477,8 +2487,6 @@
 	        if (this.props.locked) {
 	            return;
 	        }
-	        console.log(this.props.info);
-	        console.log(this.props.apiSubmit);
 	        if (this.props.apiSubmit) {
 	            Apicloud.post(this.props.action, this.props.info, function (err, res) {
 	                var data = JSON.parse(res.text);
@@ -2579,8 +2587,56 @@
 
 	'use strict';
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var classNames = __webpack_require__(17);
-	var FormGroup = __webpack_require__(20);
+
+	var FormGroup = function (_React$Component) {
+	    _inherits(FormGroup, _React$Component);
+
+	    function FormGroup() {
+	        _classCallCheck(this, FormGroup);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(FormGroup).apply(this, arguments));
+	    }
+
+	    _createClass(FormGroup, [{
+	        key: 'render',
+	        value: function render() {
+	            var classname = this.props.className ? 'form-group ' + this.props.className : 'form-group';
+	            return React.createElement('div', {
+	                className: classname
+	            }, React.createElement('label', {
+	                className: 'form-label'
+	            }, this.props.title), React.createElement('div', {
+	                className: 'form-control'
+	            }, this.props.limit ? React.createElement('i', {
+	                className: 'form-ico fa'
+	            }, this.props.limit) : null, this.props.children, this.props.help ? React.createElement('span', {
+	                className: 'form-help'
+	            }, this.props.help) : null));
+	        }
+	    }]);
+
+	    return FormGroup;
+	}(React.Component);
+
+	module.exports = FormGroup;
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var classNames = __webpack_require__(17);
+	var FormGroup = __webpack_require__(19);
 
 	var Input = React.createClass({
 	    displayName: 'Input',
@@ -2681,41 +2737,13 @@
 	module.exports = Input;
 
 /***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var classNames = __webpack_require__(17);
-
-	var FormGroup = React.createClass({
-	    displayName: 'FormGroup',
-
-	    render: function render() {
-	        var classname = this.props.className ? 'form-group ' + this.props.className : 'form-group';
-	        return React.createElement('div', {
-	            className: classname
-	        }, React.createElement('label', {
-	            className: 'form-label'
-	        }, this.props.title), React.createElement('div', {
-	            className: 'form-control'
-	        }, this.props.limit ? React.createElement('i', {
-	            className: 'form-ico fa'
-	        }, this.props.limit) : null, this.props.children, this.props.help ? React.createElement('span', {
-	            className: 'form-help'
-	        }, this.props.help) : null));
-	    }
-	});
-	module.exports = FormGroup;
-
-/***/ },
 /* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var classNames = __webpack_require__(17);
-	var FormGroup = __webpack_require__(20);
+	var FormGroup = __webpack_require__(19);
 
 	var Textarea = React.createClass({
 	    displayName: 'Textarea',
@@ -2883,7 +2911,7 @@
 
 	var upload = __webpack_require__(102);
 
-	var FormGroup = __webpack_require__(20);
+	var FormGroup = __webpack_require__(19);
 
 	var BasicHtmlEditor = function (_React$Component) {
 	    _inherits(BasicHtmlEditor, _React$Component);
@@ -21232,6 +21260,11 @@
 	    var formData = new FormData();
 	    if (data.token !== null && data.token !== undefined) formData.append('token', data.token);
 	    if (data.key !== null && data.key !== undefined) formData.append('key', data.key);
+	    if (data.data !== null && data.data !== undefined) {
+	        for (var x in data.data) {
+	            formData.append(x, data.data[x]);
+	        }
+	    }
 	    formData.append(data.name, data.file);
 	    var xhr = createCORSRequest('post', data.url, data.cors);
 	    xhr.withCredentials = data.withCredentials;
@@ -21502,7 +21535,7 @@
 
 	var classNames = __webpack_require__(17);
 	var ajaxUpload = __webpack_require__(100);
-	var FormGroup = __webpack_require__(20);
+	var FormGroup = __webpack_require__(19);
 	var Canvas = __webpack_require__(103);
 
 	var _require = __webpack_require__(101);
@@ -21813,7 +21846,7 @@
 	'use strict';
 
 	var classNames = __webpack_require__(17);
-	var FormGroup = __webpack_require__(20);
+	var FormGroup = __webpack_require__(19);
 
 	var Radio = React.createClass({
 	    displayName: 'Radio',
@@ -21911,7 +21944,7 @@
 	'use strict';
 
 	var classNames = __webpack_require__(17);
-	var FormGroup = __webpack_require__(20);
+	var FormGroup = __webpack_require__(19);
 
 	var Checkbox = React.createClass({
 	    displayName: 'Checkbox',
@@ -22024,7 +22057,7 @@
 	'use strict';
 
 	var classNames = __webpack_require__(17);
-	var FormGroup = __webpack_require__(20);
+	var FormGroup = __webpack_require__(19);
 
 	var Range = React.createClass({
 	    displayName: 'Range',
@@ -22200,7 +22233,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var classNames = __webpack_require__(17);
-	var FormGroup = __webpack_require__(20);
+	var FormGroup = __webpack_require__(19);
 
 	var Select = function (_React$Component) {
 	    _inherits(Select, _React$Component);
@@ -23383,7 +23416,7 @@
 
 	        _this.state = {
 	            info: {
-	                username: 'tianez2',
+	                username: 'tianez',
 	                password: '123456'
 	            }
 	        };
@@ -23405,14 +23438,15 @@
 	            e.preventDefault();
 	            request.post('login').send(this.state.info).set('Accept', 'application/json').end(function (err, res) {
 	                if (err) throw err;
-	                console.log(res);
 	                var data = JSON.parse(res.text);
-	                console.log(res);
-	                storedb('user').insert(data);
-	                this.props.history.pushState(null, '/');
+	                if (data.state == 'ok') {
+	                    storedb('user').insert(data.data);
+	                    this.props.history.pushState(null, '/');
+	                } else {
+	                    this.setState({ 'msg': data.msg });
+	                    console.log(data);
+	                }
 	            }.bind(this));
-	            storedb('user').insert(e);
-	            this.props.history.pushState(null, '/');
 	        }
 	    }, {
 	        key: 'render',
@@ -23429,7 +23463,9 @@
 	            }, '首页'), React.createElement(Link, {
 	                to: 'login',
 	                title: '登录'
-	            }, '登录')), React.createElement(Form, {
+	            }, '登录')), this.state.msg ? React.createElement('div', {
+	                className: 'alert alert-warning'
+	            }, this.state.msg) : null, React.createElement(Form, {
 	                action: 'user/login',
 	                info: this.state.info,
 	                apiSubmit: false,
@@ -23507,15 +23543,163 @@
 
 	'use strict';
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _require = __webpack_require__(15);
+
+	var Form = _require.Form;
+	var FormGroup = _require.FormGroup;
+	var Input = _require.Input;
+	var Button = _require.Button;
+	var Hidden = _require.Hidden;
+
+
+	var ajaxUpload = __webpack_require__(100);
+
+	var _require2 = __webpack_require__(101);
+
+	var getUpToken = _require2.getUpToken;
+
+	var Import = function (_React$Component) {
+	    _inherits(Import, _React$Component);
+
+	    function Import() {
+	        _classCallCheck(this, Import);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Import).call(this));
+
+	        _this.state = {};
+	        return _this;
+	    }
+
+	    _createClass(Import, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            ConfigActions.update('title', '数据导入');
+	        }
+	    }, {
+	        key: '_onSubmit',
+	        value: function _onSubmit() {
+	            var files = this.refs.file2.files;
+	            console.log(files);
+	            console.log('12');
+	            var token = getUpToken();
+	            var file = files[0];
+	            return ajaxUpload({
+	                url: 'admin2/uploads',
+	                name: 'file',
+	                key: file.name,
+	                file: file,
+	                data: {
+	                    table: 'member'
+	                },
+	                onProgress: function onProgress(e) {
+	                    console.log(e.loaded / e.total * 100 + '%');
+	                },
+	                onLoad: function onLoad(e) {
+	                    var res = JSON.parse(e.currentTarget.responseText);
+	                    console.log(res);
+	                },
+	                onError: function onError() {}
+	            });
+	        }
+	    }, {
+	        key: '_onSubmit2',
+	        value: function _onSubmit2() {
+	            var files = this.refs.result.files;
+	            var token = getUpToken();
+	            var file = files[0];
+	            return ajaxUpload({
+	                url: 'admin2/uploads',
+	                name: 'file',
+	                key: file.name,
+	                file: file,
+	                data: {
+	                    table: 'result'
+	                },
+	                onProgress: function onProgress(e) {
+	                    console.log(e.loaded / e.total * 100 + '%');
+	                },
+	                onLoad: function onLoad(e) {
+	                    var res = JSON.parse(e.currentTarget.responseText);
+	                    console.log(res);
+	                },
+	                onError: function onError() {}
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return React.createElement('div', {
+	                className: 'container pure-g'
+	            }, React.createElement('div', {
+	                className: 'pure-u-1'
+	            }, React.createElement(Form, {
+	                action: 'user/login',
+	                apiSubmit: false,
+	                legend: '人员数据上传',
+	                onSubmit: this._onSubmit.bind(this)
+	            }, React.createElement(FormGroup, {
+	                title: '文件上传'
+	            }, React.createElement('input', {
+	                id: 'file',
+	                name: 'file',
+	                ref: 'file2',
+	                className: 'ipt',
+	                type: 'file',
+	                multiple: false
+	            })), React.createElement(Button, {
+	                value: '文件上传'
+	            })), React.createElement(Form, {
+	                action: 'user/login',
+	                apiSubmit: false,
+	                legend: '人员数据上传',
+	                onSubmit: this._onSubmit2.bind(this)
+	            }, React.createElement(FormGroup, {
+	                title: '文件上传'
+	            }, React.createElement('input', {
+	                id: 'file',
+	                name: 'file',
+	                ref: 'result',
+	                className: 'ipt',
+	                type: 'file',
+	                multiple: false
+	            })), React.createElement(Button, {
+	                value: '文件上传'
+	            }))));
+	        }
+	    }]);
+
+	    return Import;
+	}(React.Component);
+
+	Import.defaultProps = {
+	    value: '保存'
+	};
+
+	module.exports = Import;
+
+/***/ },
+/* 122 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	/**
 	 * action
 	 */
-	window.ConfigActions = __webpack_require__(122);
+	window.ConfigActions = __webpack_require__(123);
 
 	/**
 	 * store
 	 */
-	window.ConfigStore = __webpack_require__(127);
+	window.ConfigStore = __webpack_require__(128);
 
 	//获取url参数数组
 	window.get = function (url) {
@@ -23557,12 +23741,12 @@
 	};
 
 /***/ },
-/* 122 */
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var AppDispatcher = __webpack_require__(123);
+	var AppDispatcher = __webpack_require__(124);
 
 	var ConfigActions = {
 
@@ -23596,7 +23780,7 @@
 	module.exports = ConfigActions;
 
 /***/ },
-/* 123 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23614,12 +23798,12 @@
 	 * A singleton that operates as the central hub for application updates.
 	 */
 
-	var Dispatcher = __webpack_require__(124).Dispatcher;
+	var Dispatcher = __webpack_require__(125).Dispatcher;
 
 	module.exports = new Dispatcher();
 
 /***/ },
-/* 124 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23633,10 +23817,10 @@
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 */
 
-	module.exports.Dispatcher = __webpack_require__(125);
+	module.exports.Dispatcher = __webpack_require__(126);
 
 /***/ },
-/* 125 */
+/* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -23662,7 +23846,7 @@
 	  }
 	}
 
-	var invariant = __webpack_require__(126);
+	var invariant = __webpack_require__(127);
 
 	var _prefix = 'ID_';
 
@@ -23877,7 +24061,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(38)))
 
 /***/ },
-/* 126 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -23932,13 +24116,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(38)))
 
 /***/ },
-/* 127 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var AppDispatcher = __webpack_require__(123);
-	var EventEmitter = __webpack_require__(128).EventEmitter;
+	var AppDispatcher = __webpack_require__(124);
+	var EventEmitter = __webpack_require__(129).EventEmitter;
 	var assign = __webpack_require__(42);
 
 	var CHANGE_EVENT = 'config';
@@ -24019,7 +24203,7 @@
 	}
 
 /***/ },
-/* 128 */
+/* 129 */
 /***/ function(module, exports) {
 
 	'use strict';

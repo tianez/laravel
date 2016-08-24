@@ -144,6 +144,10 @@ class Sidebar extends React.Component {
                         to: 'drag',
                         title: 'drag'
                     }),
+                    React.createElement(A, {
+                        to: 'import',
+                        title: 'import'
+                    }),
                     menus,
                     menus2
                 )

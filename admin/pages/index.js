@@ -13,6 +13,7 @@ const Pages = require('./Pages')
 const Page = require('./Page')
 const Login = require('./login')
 const Logout = require('./logout')
+const Import = require('./Import')
 
 var Temp = {
     Layout: Layout,
@@ -27,6 +28,7 @@ var Temp = {
     Pages: Pages,
     Page: Page,
     Login: Login,
-    Logout: Logout
+    Logout: Logout,
+    Import:Import
 }
 module.exports = Temp

@@ -2,19 +2,19 @@
 
 const classNames = require('classNames')
 
-var FormGroup = React.createClass({
-    render: function() {
+class FormGroup extends React.Component {
+    render() {
         let classname = this.props.className ? 'form-group ' + this.props.className : 'form-group'
         return (
             React.createElement('div', {
-                    className: classname
-                },
+                className: classname
+            },
                 React.createElement('label', {
                     className: 'form-label'
                 }, this.props.title),
                 React.createElement('div', {
-                        className: 'form-control'
-                    },
+                    className: 'form-control'
+                },
                     this.props.limit ? React.createElement('i', {
                         className: 'form-ico fa'
                     }, this.props.limit) : null,
@@ -26,5 +26,5 @@ var FormGroup = React.createClass({
             )
         )
     }
-})
+}
 module.exports = FormGroup
