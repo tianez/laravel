@@ -1,1 +1,1 @@
-html{font-size:62.5%}.result{padding:0 1.5rem;font-size:1.2rem}.result .table{width:100%;border:1px solid #ddd;border-width:1px 1px 0 0}.result td{border:1px solid #ddd;border-width:0 1px 1px 0}
+html{font-size:62.5%}.result{padding:0 1.5rem;font-size:1.2rem}.result .table{width:100%;border:1px solid #ddd;border-width:1px 0 0 1px;border-spacing:0;border-collapse:collapse}.result td,.result th{padding:8px;border:1px solid #ddd;border-width:0 1px 1px 0}

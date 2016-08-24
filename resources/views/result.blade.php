@@ -35,7 +35,7 @@
   @foreach ($res as $key=> $r)
   <tr>
     <td>{{$key}}</td>
-    <td>{{$r}}</td>
+    <td>{!!$r!!}</td>
   </tr>
   @endforeach
 </table>
