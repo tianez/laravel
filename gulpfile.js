@@ -6,12 +6,10 @@ var sourcemaps = require('gulp-sourcemaps')
 var cssmin = require('gulp-clean-css') //css压缩
 var uglify = require('gulp-uglify') //js压缩
 var concat = require('gulp-concat') //文件合并
-
 var rename = require('gulp-rename') //文件更名
-
 var webpack = require("gulp-webpack")
 
-var dir = './react/'
+var dir = './admin/'
 
 var webpackConfig = require(dir + 'webpack.config.js')
 

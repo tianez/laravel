@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.5",
+    "draft-js": "^0.8.1",
     "flux": "^2.1.1",
     "object-assign": "^4.1.0",
     "react": "^15.3.0",
@@ -48,4 +49,3 @@
     "webpack": "^1.13.1"
   }
 }
-

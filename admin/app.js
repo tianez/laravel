@@ -48,9 +48,9 @@ const {
     Page,
     Login,
     Logout
-} = require('./html')
+} = require('./pages') 
 
-require('./html/global')
+require('./pages/global')
 // require('./html/IndexedDB')
 
 function onEnter(nextState, replace) {
