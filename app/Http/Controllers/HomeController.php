@@ -46,7 +46,6 @@ class HomeController extends Controller {
         $password = $request->password;
         if(empty($name) ||empty($password) ){
             $request->session()->flash('msg', '体检单号或查询密码不能为空！');
-            return redirect('/');
         }
         $user = DB::table('members')->where('client_number', $name)->where('password', $password)->first();
         if($user){
