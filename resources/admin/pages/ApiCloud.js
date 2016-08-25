@@ -56,6 +56,7 @@ var ApiCloud = React.createClass({
         }
         Apicloud.get('model', filter, function (err, res) {
             let model = JSON.parse(res.text)
+            console.log(model);
             if (articleId !== 'add') {
                 action = action + '/' + articleId
                 let article = storedb('article').find({ 'id': articleId })

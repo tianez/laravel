@@ -1,4 +1,4 @@
-.container { 
+.container {
     width: 100%;
     max-width: 1180px;
     margin: 0 auto;
@@ -45,19 +45,25 @@
     // box-shadow: 0 2px 4px -1px #ddd;
     z-index: 999;
     height: 4.6rem;
-    .pure-menu-heading {
-        background: none;
-        width: 20rem;
-        border-right: 1px solid #364150;
-    }
-    .pure-menu-heading:hover, .pure-menu-link:hover {
-        color: #ee521c;
-    }
+    
     .pure-menu-link {
         color: #c6cfda;
         padding: 0 2rem;
         line-height: 4.6rem;
         font-size: 1.6rem;
+    }
+    .pure-menu-link:hover {
+        color: #fff;
+        background: rgba(0,0,0,.2);
+    }
+    .pure-menu-heading {
+        background: none;
+        width: 20rem;
+        border-right: 1px solid #364150;
+    }
+    .pure-menu-heading:hover {
+        color: #ee521c;
+        background: none;
     }
     .active {
         color: #ee521c;

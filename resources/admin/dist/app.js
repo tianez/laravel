@@ -1905,35 +1905,24 @@
 	    _createClass(Header, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            var filter = {
-	                where: {
-	                    state: 1
-	                },
-	                order: ['order DESC', 'createdAt DESC'],
-	                limit: 20
-	            };
-	            var that = this;
 	            new Promise(function (resolve, reject) {
-	                Apicloud.get('menu', filter, function (err, res) {
+	                request.get('admin/user').set('Accept', 'application/json').end(function (err, res) {
 	                    if (err) {
 	                        reject('error');
 	                    } else {
-	                        var menu = JSON.parse(res.text);
-	                        resolve(menu);
-	                        that.setState({
-	                            menu: menu
-	                        });
+	                        var data = JSON.parse(res.text);
+	                        console.log(data);
+	                        resolve(data);
 	                    }
-	                });
+	                }.bind(this));
 	            }).then(function (r) {
-	                // console.log('Done: ' + r);
 	                return new Promise(function (resolve, reject) {
 	                    resolve('2000 OK');
 	                });
 	            }).then(function (r) {
 	                console.log('Done: ' + r);
-	            }).catch(function (reason) {
-	                console.log('Failed: ' + reason);
+	            }).catch(function (r) {
+	                console.log('Failed: ' + r);
 	            });
 	        }
 	    }, {
@@ -1946,7 +1935,7 @@
 	                className: 'pure-menu-heading pure-menu-link left',
 	                to: '/'
 	            }, '我的理想乡'), React.createElement('ul', {
-	                className: 'pure-menu-list left'
+	                className: 'pure-menu-list right'
 	            }, React.createElement(A, {
 	                to: 'login',
 	                title: 'login'
@@ -2009,67 +1998,16 @@
 	    return A;
 	}(React.Component);
 
-	var Children = function (_React$Component2) {
-	    _inherits(Children, _React$Component2);
-
-	    function Children() {
-	        _classCallCheck(this, Children);
-
-	        var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Children).call(this));
-
-	        _this2.state = {
-	            data: []
-	        };
-	        return _this2;
-	    }
-
-	    _createClass(Children, [{
-	        key: '_onClick',
-	        value: function _onClick(e) {
-	            this.setState({
-	                curl: e.currentTarget.id
-	            });
-	            e.preventDefault();
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var list = void 0;
-	            var lists = this.props.data.lists;
-	            if (lists) {
-	                return React.createElement("ul", {
-	                    className: 'pure-menu-sub'
-	                }, lists.map(function (d, index) {
-	                    return React.createElement(A, {
-	                        key: index,
-	                        to: 'api/' + d.curl,
-	                        title: d.title,
-	                        icon: d.icon
-	                    }, React.createElement(Children, {
-	                        data: d
-	                    }));
-	                }.bind(this)));
-	            } else {
-	                return null;
-	            }
-	        }
-	    }]);
-
-	    return Children;
-	}(React.Component);
-
-	var Sidebar = function (_React$Component3) {
-	    _inherits(Sidebar, _React$Component3);
+	var Sidebar = function (_React$Component2) {
+	    _inherits(Sidebar, _React$Component2);
 
 	    function Sidebar() {
 	        _classCallCheck(this, Sidebar);
 
-	        var _this3 = _possibleConstructorReturn(this, Object.getPrototypeOf(Sidebar).call(this));
+	        var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Sidebar).call(this));
 
-	        _this3.state = {
-	            menu: []
-	        };
-	        return _this3;
+	        _this2.state = {};
+	        return _this2;
 	    }
 
 	    _createClass(Sidebar, [{
@@ -2085,7 +2023,7 @@
 	            Apicloud.get('menu', filter, function (err, res) {
 	                var menu = JSON.parse(res.text);
 	                this.setState({
-	                    menu2: menu
+	                    menu: menu
 	                });
 	            }.bind(this));
 	        }
@@ -2095,19 +2033,6 @@
 	            var menus = void 0;
 	            if (this.state.menu) {
 	                menus = this.state.menu.map(function (d, index) {
-	                    return React.createElement(A, {
-	                        key: index,
-	                        to: 'api/' + d.curl,
-	                        title: d.title,
-	                        icon: d.icon
-	                    }, React.createElement(Children, {
-	                        data: d
-	                    }));
-	                });
-	            }
-	            var menus2 = void 0;
-	            if (this.state.menu2) {
-	                menus = this.state.menu2.map(function (d, index) {
 	                    return React.createElement(A, {
 	                        key: index,
 	                        to: d.link,
@@ -2129,7 +2054,7 @@
 	            }), React.createElement(A, {
 	                to: 'import',
 	                title: 'import'
-	            }), menus, menus2));
+	            }), menus));
 	        }
 	    }]);
 
@@ -2669,6 +2594,7 @@
 	            var _this = this;
 
 	            var model = JSON.parse(res.text);
+	            console.log(model);
 	            if (articleId !== 'add') {
 	                (function () {
 	                    action = action + '/' + articleId;
@@ -5094,11 +5020,10 @@
 	        value: function _onSubmit() {
 	            var files = this.refs.file2.files;
 	            console.log(files);
-	            console.log('12');
 	            var token = getUpToken();
 	            var file = files[0];
 	            return ajaxUpload({
-	                url: 'admin2/uploads',
+	                url: 'admin/uploads',
 	                name: 'file',
 	                key: file.name,
 	                file: file,
@@ -5122,7 +5047,7 @@
 	            var token = getUpToken();
 	            var file = files[0];
 	            return ajaxUpload({
-	                url: 'admin2/uploads',
+	                url: 'admin/uploads',
 	                name: 'file',
 	                key: file.name,
 	                file: file,

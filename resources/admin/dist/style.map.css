@@ -133,20 +133,24 @@ hr {
   z-index: 999;
   height: 4.6rem;
 }
-#header .pure-menu-heading {
-  background: none;
-  width: 20rem;
-  border-right: 1px solid #364150;
-}
-#header .pure-menu-heading:hover,
-#header .pure-menu-link:hover {
-  color: #ee521c;
-}
 #header .pure-menu-link {
   color: #c6cfda;
   padding: 0 2rem;
   line-height: 4.6rem;
   font-size: 1.6rem;
+}
+#header .pure-menu-link:hover {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.2);
+}
+#header .pure-menu-heading {
+  background: none;
+  width: 20rem;
+  border-right: 1px solid #364150;
+}
+#header .pure-menu-heading:hover {
+  color: #ee521c;
+  background: none;
 }
 #header .active {
   color: #ee521c;

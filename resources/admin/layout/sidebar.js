@@ -8,15 +8,15 @@ class A extends React.Component {
     render() {
         return (
             React.createElement('li', {
-                    className: 'pure-menu-item'
-                },
+                className: 'pure-menu-item'
+            },
                 React.createElement(Link, {
-                        className: 'pure-menu-link',
-                        to: '/' + this.props.to,
-                        activeClassName: 'active'
-                    },
+                    className: 'pure-menu-link',
+                    to: '/' + this.props.to,
+                    activeClassName: 'active'
+                },
                     React.createElement("i", {
-                        className: this.props.icon|| 'fa fa-home'
+                        className: this.props.icon || 'fa fa-home'
                     }),
                     React.createElement("span", {}, this.props.title)
                 ),
@@ -26,85 +26,30 @@ class A extends React.Component {
     }
 }
 
-class Children extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-            data: []
-        }
-    }
-    _onClick(e) {
-        this.setState({
-            curl: e.currentTarget.id
-        })
-        e.preventDefault()
-    }
-    render() {
-        let list
-        let lists = this.props.data.lists
-        if (lists) {
-            return React.createElement("ul", {
-                    className: 'pure-menu-sub'
-                },
-                lists.map(function(d, index) {
-                    return (
-                        React.createElement(A, {
-                                key: index,
-                                to: 'api/' + d.curl,
-                                title: d.title,
-                                icon: d.icon
-                            },
-                            React.createElement(Children, {
-                                data: d,
-                            }))
-                    )
-                }.bind(this))
-            )
-        } else {
-            return null
-        }
-    }
-}
 class Sidebar extends React.Component {
     constructor() {
         super()
-        this.state = {
-            menu: []
-        }
+        this.state = {}
     }
     componentDidMount() {
-        let filter = { 
+        let filter = {
             where: {
                 state: 1
             },
             order: ['order DESC', 'createdAt DESC'],
             limit: 20
         }
-        Apicloud.get('menu', filter, function(err, res) {
+        Apicloud.get('menu', filter, function (err, res) {
             let menu = JSON.parse(res.text)
             this.setState({
-                menu2: menu
+                menu: menu
             })
         }.bind(this))
     }
     render() {
         let menus
         if (this.state.menu) {
-            menus = this.state.menu.map(function(d, index) {
-                return React.createElement(A, {
-                        key: index,
-                        to: 'api/' + d.curl,
-                        title: d.title,
-                        icon: d.icon
-                    },
-                    React.createElement(Children, {
-                        data: d,
-                    }))
-            })
-        }
-        let menus2
-        if (this.state.menu2) {
-            menus = this.state.menu2.map(function(d, index) {
+            menus = this.state.menu.map(function (d, index) {
                 return React.createElement(A, {
                     key: index,
                     to: d.link,
@@ -114,16 +59,16 @@ class Sidebar extends React.Component {
         }
         return (
             React.createElement('aside', {
-                    id: 'sidebar',
-                    className: 'pure-u-1 pure-menu sidebar'
-                },
+                id: 'sidebar',
+                className: 'pure-u-1 pure-menu sidebar'
+            },
                 React.createElement(Link, {
                     className: 'pure-menu-heading pure-menu-link',
                     to: '/'
                 }, '我的理想乡'),
                 React.createElement('ul', {
-                        className: 'pure-menu-list'
-                    },
+                    className: 'pure-menu-list'
+                },
                     React.createElement(A, {
                         to: 'drag',
                         title: 'drag'
@@ -132,8 +77,7 @@ class Sidebar extends React.Component {
                         to: 'import',
                         title: 'import'
                     }),
-                    menus,
-                    menus2
+                    menus
                 )
             )
         )
