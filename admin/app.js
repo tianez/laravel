@@ -15,12 +15,15 @@ const {
 } = ReactRouter
 
 const {
-    Layout,
+    Layout
+} = require('./layout') 
+
+const {
     Nomatch,
     Home,
     Drag,
     ApiCloudsIndex,
-    ApiClouds,
+    ApiClouds, 
     ApiCloud,
     Pages,
     Page,
@@ -29,7 +32,7 @@ const {
     Import
 } = require('./pages') 
 
-require('./pages/global')
+require('./global')
 
 function onEnter(nextState, replace) {
     let pathname = nextState.location.pathname

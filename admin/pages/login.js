@@ -6,7 +6,7 @@ const {
 const {
     Form,
     Input,
-    Button
+    Button 
 } = require('../components/forms/index')
 class Login extends React.Component {
     constructor(props) {
@@ -28,7 +28,7 @@ class Login extends React.Component {
     _onSubmit(e) {
         e.preventDefault();
         request
-            .post('login')
+            .post('admin/login')
             .send(this.state.info)
             .set('Accept', 'application/json')
             .end(function (err, res) {

@@ -59,19 +59,8 @@ class HomeController extends Controller {
     public function login(Request $request) {
         return view('login');
     }
-    
-    public function login_post(request $request) {
-        $req = $request->all();
-        $data = array('user_name' => $req['username'], 'password' => $req['password']);
-        $auth = Auth::attempt($data, true);
-        $res = array();
-        if ($auth) {
-            $res['state'] = 'ok';
-            $res['data'] =  Auth::user();
-        } else {
-            $res['state'] = 'error';
-            $res['msg'] = '用户名或密码错误！';
-        }
-        return response()->json($res);
+
+    public function logout(Request $request) {
+        return view('login');
     }
 }
