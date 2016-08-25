@@ -1,0 +1,107 @@
+.container {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+#warper {
+    .switch {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .switch-enter {
+        opacity: 0;
+        transform: translate(100%, 0);
+        transform: translate3d(100%, 0, 0);
+    }
+    .switch-enter.switch-enter-active {
+        opacity: 1;
+        transform: translate(0, 0);
+        transform: translate3d(0, 0, 0);
+        transition-property: transform, opacity;
+        transition-duration: 200ms;
+        transition-timing-function: cubic-bezier(0.175, 0.665, 0.320, 1), linear;
+    }
+    .switch-leave {
+        opacity: 1;
+        transform: translate(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        transition-property: transform, opacity;
+        transition-duration: 200ms;
+        transition-timing-function: cubic-bezier(0.175, 0.665, 0.320, 1), linear;
+    }
+    .switch-leave.switch-leave-active {
+        opacity: 0;
+        transform: translate(-100%, 0);
+        transform: translate3d(-100%, 0, 0);
+    }
+}
+
+#header {
+    background: #2B3643;
+    // box-shadow: 0 2px 4px -1px #ddd;
+    z-index: 999;
+    height: 4.6rem;
+    
+    .pure-menu-link {
+        color: #c6cfda;
+        padding: 0 2rem;
+        line-height: 4.6rem;
+        font-size: 1.6rem;
+    }
+    .pure-menu-link:hover {
+        color: #fff;
+        background: rgba(0,0,0,.2);
+    }
+    .pure-menu-heading {
+        background: none;
+        width: 20rem;
+        border-right: 1px solid #364150;
+    }
+    .pure-menu-heading:hover {
+        color: #ee521c;
+        background: none;
+    }
+    .active {
+        color: #ee521c;
+        background: none;
+    }
+}
+
+#main {
+    padding: 0 0 0 20rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+#sidebar {
+    position: fixed;
+    top: 4rem;
+    left: 0;
+    bottom: 0;
+    width: 20rem;
+    padding: 2rem 0 0;
+    background: #364150;
+}
+
+#content {
+    position: relative;
+    padding: 5rem 2rem;
+}
+
+#footer {
+    background: #111;
+    color: #7f8c8d;
+    font-size: 1.4rem;
+    line-height: 3.2rem;
+    height: 3.2rem;
+    padding: 0 2rem;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+}

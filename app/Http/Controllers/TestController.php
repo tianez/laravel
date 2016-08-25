@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Schema;
 use Illuminate\Database\Schema\Blueprint;
 
-class HomeController extends Controller {
+class TestController extends Controller {
     
     public function __construct() {
         // $this->middleware('auth',['except' => 'login']);
@@ -46,7 +46,6 @@ class HomeController extends Controller {
         $password = $request->password;
         if(empty($name) ||empty($password) ){
             $request->session()->flash('msg', '体检单号或查询密码不能为空！');
-            return redirect('/');
         }
         $user = DB::table('members')->where('client_number', $name)->where('password', $password)->first();
         if($user){

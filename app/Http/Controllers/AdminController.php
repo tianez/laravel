@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class AdminController extends Controller {
     
     public function __construct() {
-        $this->middleware('auth',['except' => 'getIndex']);
+        $this->middleware('auth',['except' => ['getIndex','postLogin']]);
     }
     
     public function getIndex(Request $request) {
@@ -19,6 +19,21 @@ class AdminController extends Controller {
     
     public function getUser(Request $request) {
         return response()->json(Auth::user());
+    }
+    
+    public function postLogin(request $request) {
+        $req = $request->all();
+        $data = array('user_name' => $req['username'], 'password' => $req['password']);
+        $auth = Auth::attempt($data, true);
+        $res = array();
+        if ($auth) {
+            $res['state'] = 'ok';
+            $res['data'] =  Auth::user();
+        } else {
+            $res['state'] = 'error';
+            $res['msg'] = '用户名或密码错误！';
+        }
+        return response()->json($res);
     }
     
     public function postUploads(Request $request) {
@@ -77,7 +92,7 @@ class AdminController extends Controller {
                     }
                 }
                 $result =DB::table('report') -> insert($d);
-				$etime = mtime()-$stime;
+                $etime = mtime()-$stime;
                 $res['state'] = 'ok';
                 $res['msg'] =  "体检结果导入成功！新增" . $add . "条数据，耗时".$etime."秒";
             } else {
@@ -86,7 +101,6 @@ class AdminController extends Controller {
         }
         return response()->json($res);
     }
-    
     
     //  分解数据字段
     private function str($arr) {
