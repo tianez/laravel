@@ -7,7 +7,7 @@ use App\User;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
-
+use Image;
 
 use Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,27 +18,9 @@ class TestController extends Controller {
         // $this->middleware('auth',['except' => 'login']);
     }
     
-    public function index(Request $request) {
-        
-        $user = session('cur_user');
-        if($user){
-            $results = DB::table('report')->where('client_number', $user->client_number)->get();
-            $res = array();
-            foreach ($results as $result) {
-                if ($result->result == ' 空')
-                    continue;
-                if (empty($res[$result->item])) {
-                    $res[$result->item] = $result->result;
-                } else {
-                    $res[$result->item] .= '<br>' . $result->result;
-                }
-            }
-            $d['res'] = $res;
-            $d['user'] = $user;
-            return view('result',$d);
-        }else{
-            return view('home');
-        }
+    public function getIndex(Request $request) {
+        $img = Image::make('resources/images/1.jpg')->resize(800, 600);
+        return $img->response('jpg');
     }
     
     public function index_post(Request $request) {
@@ -120,8 +102,8 @@ class TestController extends Controller {
         }else{
             Schema::table($db_name, function($table)
             {
-               $res =  $table->string($this->db_file)->after('u8');
-               dump($res);
+                $res =  $table->string($this->db_file)->after('u8');
+                dump($res);
             });
             // Schema::create($db_name, function(Blueprint $table) {
             //     $table->string('ss');
