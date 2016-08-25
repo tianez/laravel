@@ -15,9 +15,13 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/', 'HomeController@index');
     Route::post('/', 'HomeController@index_post');
     Route::get('result', 'HomeController@result');
+    Route::post('result', 'HomeController@result_post');
+    Route::get('addtb', 'HomeController@addtb');
+    Route::post('addtb', 'HomeController@addtb_post');
     Route::get('login', 'HomeController@login');
     Route::post('login', 'HomeController@login_post');
-    Route::controller('admin2', 'AdminController');
+    Route::controller('admin', 'AdminController');
+    Route::controller('test', 'TestController');
 });
 
 

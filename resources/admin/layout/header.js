@@ -52,32 +52,15 @@ class Header extends React.Component {
         }).then(function(r) {
             // console.log('Done: ' + r);
             return new Promise(function(resolve, reject) {
-                // console.log('calculating');
                 resolve('2000 OK');
             });
         }).then(function(r) {
             console.log('Done: ' + r);
         }).catch(function(reason) {
             console.log('Failed: ' + reason);
-        });
-        // Apicloud.get('menu', filter, function(err, res) {
-        //     let menu = JSON.parse(res.text)
-        //     this.setState({
-        //         menu: menu
-        //     })
-        // }.bind(this))
+        })
     }
     render() {
-        let menus
-        if (this.state.menu) {
-            menus = this.state.menu.map(function(d, index) {
-                return React.createElement(A, {
-                    key: index,
-                    to: d.link,
-                    title: d.title
-                })
-            })
-        }
         return (
             React.createElement('header', {
                     id: 'header',
@@ -97,8 +80,7 @@ class Header extends React.Component {
                     React.createElement(A, {
                         to: 'logout',
                         title: 'logout'
-                    }),
-                    menus
+                    })
                 )
             )
         )

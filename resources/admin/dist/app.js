@@ -1928,7 +1928,6 @@
 	            }).then(function (r) {
 	                // console.log('Done: ' + r);
 	                return new Promise(function (resolve, reject) {
-	                    // console.log('calculating');
 	                    resolve('2000 OK');
 	                });
 	            }).then(function (r) {
@@ -1936,26 +1935,10 @@
 	            }).catch(function (reason) {
 	                console.log('Failed: ' + reason);
 	            });
-	            // Apicloud.get('menu', filter, function(err, res) {
-	            //     let menu = JSON.parse(res.text)
-	            //     this.setState({
-	            //         menu: menu
-	            //     })
-	            // }.bind(this))
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var menus = void 0;
-	            if (this.state.menu) {
-	                menus = this.state.menu.map(function (d, index) {
-	                    return React.createElement(A, {
-	                        key: index,
-	                        to: d.link,
-	                        title: d.title
-	                    });
-	                });
-	            }
 	            return React.createElement('header', {
 	                id: 'header',
 	                className: 'pure-u-1 pure-menu pure-menu-horizontal pure-menu-fixed'
@@ -1970,7 +1953,7 @@
 	            }), React.createElement(A, {
 	                to: 'logout',
 	                title: 'logout'
-	            }), menus));
+	            })));
 	        }
 	    }]);
 
@@ -4959,7 +4942,7 @@
 	        key: '_onSubmit',
 	        value: function _onSubmit(e) {
 	            e.preventDefault();
-	            request.post('admin2/login').send(this.state.info).set('Accept', 'application/json').end(function (err, res) {
+	            request.post('admin/login').send(this.state.info).set('Accept', 'application/json').end(function (err, res) {
 	                if (err) throw err;
 	                var data = JSON.parse(res.text);
 	                if (data.state == 'ok') {

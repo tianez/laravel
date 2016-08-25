@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Schema;
 use Illuminate\Database\Schema\Blueprint;
 
-class HomeController extends Controller {
+class TestController extends Controller {
     
     public function __construct() {
         // $this->middleware('auth',['except' => 'login']);

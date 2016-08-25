@@ -28,7 +28,7 @@ class Login extends React.Component {
     _onSubmit(e) {
         e.preventDefault();
         request
-            .post('admin2/login')
+            .post('admin/login')
             .send(this.state.info)
             .set('Accept', 'application/json')
             .end(function (err, res) {
