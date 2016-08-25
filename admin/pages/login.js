@@ -13,8 +13,8 @@ class Login extends React.Component {
         super(props)
         this.state = {
             info: {
-                username: 'tianez',
-                password: '123456'
+                username: '',
+                password: ''
             }
         }
     }
@@ -28,7 +28,7 @@ class Login extends React.Component {
     _onSubmit(e) {
         e.preventDefault();
         request
-            .post('admin/login')
+            .post('admin2/login')
             .send(this.state.info)
             .set('Accept', 'application/json')
             .end(function (err, res) {

@@ -2,7 +2,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Model\User;
+// use App\Http\Model\User;
+use App\User;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ class HomeController extends Controller {
     }
     
     public function index(Request $request) {
+        
         $user = session('cur_user');
         if($user){
             $results = DB::table('report')->where('client_number', $user->client_number)->get();
@@ -53,13 +55,17 @@ class HomeController extends Controller {
     }
     
     public function result(Request $request) {
-        return view('login');
+        $user = new User();
+        // 调用方法
+        $sd = $user->getTableColumns();
+        dump(DB::getConnection());
+        dump($sd );
     }
     
     public function login(Request $request) {
         return view('login');
     }
-
+    
     public function logout(Request $request) {
         return view('login');
     }

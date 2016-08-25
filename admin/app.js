@@ -16,28 +16,28 @@ const {
 
 const {
     Layout
-} = require('./layout') 
+} = require('./layout')
 
 const {
     Nomatch,
     Home,
     Drag,
     ApiCloudsIndex,
-    ApiClouds, 
+    ApiClouds,
     ApiCloud,
     Pages,
     Page,
     Login,
     Logout,
     Import
-} = require('./pages') 
+} = require('./pages')
 
 require('./global')
 
 function onEnter(nextState, replace) {
     let pathname = nextState.location.pathname
     let user = storedb('user').find() ? true : false
-    console.log(storedb('user').find());
+    console.log('当前用户:' + storedb('user').find());
     if (!user && pathname !== 'login' && pathname !== '/login') {
         ConfigActions.update('msg', '你还没有登录，请先登录！')
         replace({
@@ -52,12 +52,12 @@ function onEnter(nextState, replace) {
 
 const routers = (
     React.createElement(Router, {
-            history: hashHistory
-        },
+        history: hashHistory
+    },
         React.createElement(Route, {
-                path: "/",
-                component: Layout
-            },
+            path: "/",
+            component: Layout
+        },
             // React.createElement(IndexRedirect, {
             //     to: 'apicloud/article'
             // }),
@@ -74,15 +74,15 @@ const routers = (
                 component: Drag
             }),
             React.createElement(Route, {
-                    path: "apicloud"
-                },
+                path: "apicloud"
+            },
                 React.createElement(IndexRoute, {
                     component: ApiCloudsIndex,
                     onEnter: onEnter
                 }),
                 React.createElement(Route, {
-                        path: ":clouds"
-                    },
+                    path: ":clouds"
+                },
                     React.createElement(IndexRoute, {
                         component: ApiClouds,
                         onEnter: onEnter
@@ -94,8 +94,8 @@ const routers = (
                 )
             ),
             React.createElement(Route, {
-                    path: "api",
-                },
+                path: "api",
+            },
                 React.createElement(IndexRoute, {
                     component: ApiCloudsIndex
                 }),
@@ -104,8 +104,8 @@ const routers = (
                     to: ':pages/index'
                 }),
                 React.createElement(Route, {
-                        path: ":pages"
-                    },
+                    path: ":pages"
+                },
                     React.createElement(Route, {
                         path: "index",
                         component: Pages

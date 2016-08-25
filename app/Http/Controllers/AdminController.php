@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class AdminController extends Controller {
     
     public function __construct() {
-        $this->middleware('auth',['except' => 'getIndex']);
+        $this->middleware('auth',['except' => ['getIndex','postLogin']]);
     }
     
     public function getIndex(Request $request) {

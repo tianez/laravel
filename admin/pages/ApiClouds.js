@@ -2,7 +2,7 @@
 let Link = ReactRouter.Link
 const Apicloud = require('../components/utils/Apicloud')
 var ApiClouds = React.createClass({
-    getDefaultProps: function() {
+    getDefaultProps: function () {
         return {
             article: {
                 title: '文章管理',
@@ -22,21 +22,21 @@ var ApiClouds = React.createClass({
             title: '+45689'
         }
     },
-    componentWillMount: function() {
+    componentWillMount: function () {
         let clouds = this.props.params.clouds
         this.setState({
             table: this.props[clouds]
         })
     },
-    componentDidMount: function() {
+    componentDidMount: function () {
         this._req(this.props)
     },
-    componentWillReceiveProps: function(nextProps) {
+    componentWillReceiveProps: function (nextProps) {
         if ((nextProps.location.pathname !== this.state.hash) || (nextProps.location.search !== this.state.search)) {
             this._req(nextProps)
         }
     },
-    _req: function(props) {
+    _req: function (props) {
         let action = props.params.clouds
         let title = this.props[action] ? this.props[action].title : '田恩仲开发设计'
         ConfigActions.update('title', title)
@@ -52,7 +52,7 @@ var ApiClouds = React.createClass({
             limit: $_GET['limit'] ? parseInt($_GET['limit']) : 20,
             skip: $_GET['skip'] ? parseInt($_GET['skip']) : 0
         }
-        Apicloud.get(props.params.clouds, filter, function(err, res) {
+        Apicloud.get(props.params.clouds, filter, function (err, res) {
             if (err) {
                 ConfigActions.msg(res.status + 'error');
             } else {
@@ -76,10 +76,10 @@ var ApiClouds = React.createClass({
             }
         }.bind(this))
     },
-    render: function() {
+    render: function () {
         let thead
         if (this.state.table.thead) {
-            thead = this.state.table.thead.map(function(d, index) {
+            thead = this.state.table.thead.map(function (d, index) {
                 return React.createElement('th', {
                     key: index
                 }, d)
@@ -87,23 +87,23 @@ var ApiClouds = React.createClass({
         }
         let lists
         if (this.state.info) {
-            lists = this.state.info.map(function(d, index) {
+            lists = this.state.info.map(function (d, index) {
                 let curl = '/apicloud/' + this.props.params.clouds + '/' + d.id
                 return (
                     React.createElement('tr', {
-                            className: (index % 2 == 0) ? 'pure-table-odd' : '',
-                            key: index
-                        },
+                        className: (index % 2 == 0) ? 'pure-table-odd' : '',
+                        key: index
+                    },
                         React.createElement('td', {}, '#'),
-                        this.state.table.tbody.map(function(t, i) {
+                        this.state.table.tbody.map(function (t, i) {
                             return React.createElement('td', {
                                 key: i
                             }, d[t])
                         }),
                         React.createElement('td', {},
                             React.createElement(Link, {
-                                    to: curl
-                                },
+                                to: curl
+                            },
                                 '编辑'
                             )
                         )
@@ -113,55 +113,71 @@ var ApiClouds = React.createClass({
         }
         return (
             React.createElement('section', {
+                className: 'warp'
+            },
+                React.createElement('section', {
                     className: 'pure-g'
                 },
-                React.createElement('h3', {
+                    React.createElement('h3', {
                         className: 'pure-u-1'
                     },
-                    this.state.table.title
-                ),
-                React.createElement('div', {
+                        this.state.table.title
+                    ),
+                    React.createElement('div', {
                         className: 'pure-u-1 filter'
                     },
-                    React.createElement('a', {
+                        React.createElement('a', {
                             className: 'pure-menu-link'
                         },
-                        '筛选'
-                    ),
-                    React.createElement(Link, {
-                            to: '/apicloud/' + this.props.params.clouds,
-                            className: 'pure-menu-link'
-                        },
-                        '全部'
-                    ),
-                    React.createElement(Link, {
+                            '筛选'
+                        ),
+                        React.createElement(Link, {
                             to: '/apicloud/' + this.props.params.clouds,
                             className: 'pure-menu-link',
+                            activeClassName: 'active'
+                        },
+                            '全部'
+                        ),
+                        React.createElement(Link, {
+                            to: '/apicloud/' + this.props.params.clouds,
+                            className: 'pure-menu-link',
+                            activeClassName: 'active',
                             query: {
                                 state: 1
                             }
                         },
-                        '正常'
-                    )
-                ),
-                React.createElement('div', {
+                            '正常'
+                        ),
+                        React.createElement(Link, {
+                            to: '/apicloud/' + this.props.params.clouds,
+                            className: 'pure-menu-link',
+                            activeClassName: 'active',
+                            query: {
+                                state: 0
+                            }
+                        },
+                            '删除'
+                        )
+                    ),
+                    React.createElement('div', {
                         className: 'pure-u-1'
                     },
-                    React.createElement('table', {
+                        React.createElement('table', {
                             className: 'pure-table',
                             style: {
                                 width: "100%"
                             }
                         },
-                        React.createElement('thead', {},
-                            React.createElement('tr', {},
-                                thead
-                            )
-                        ),
-                        React.createElement('tbody', {
+                            React.createElement('thead', {},
+                                React.createElement('tr', {},
+                                    thead
+                                )
+                            ),
+                            React.createElement('tbody', {
                                 id: 'uid'
                             },
-                            lists
+                                lists
+                            )
                         )
                     )
                 )

@@ -1,12 +1,17 @@
 /**
  * action
  */
-window.ConfigActions = require('../flux/ConfigActions')
+window.ConfigActions = require('./flux/ConfigActions')
 
 /**
  * store
  */
-window.ConfigStore = require('../flux/ConfigStore')
+window.ConfigStore = require('./flux/ConfigStore')
+
+/** 
+ * 请求数据
+*/
+window.request = require('superagent')
 
 //获取url参数数组
 window.get = function (url) {

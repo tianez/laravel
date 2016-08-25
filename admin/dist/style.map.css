@@ -8,6 +8,7 @@
 html {
   font-size: 10px;
   width: 100%;
+  background: #FBFBFB;
   overflow-x: hidden;
 }
 body {
@@ -1613,8 +1614,20 @@ input.uniform-input:focus {
   box-pack: center;
 }
 .filter {
-  padding: 1rem 0;
+  margin: 2rem 0;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
 .filter .pure-menu-link {
   float: left;
+  line-height: 4.4rem;
+  padding: 0 2rem;
+  font-size: 1.6rem;
+}
+.filter .pure-menu-link:hover {
+  border-bottom: 2px solid #eee;
+}
+.filter .active {
+  background: #eee;
+  border-bottom: 2px solid #f00 !important;
 }

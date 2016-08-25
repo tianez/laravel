@@ -3,8 +3,6 @@ const {
     Link
 } = ReactRouter;
 
-const request = require('superagent')
-
 const Apicloud = require('../components/utils/Apicloud')
 class A extends React.Component {
     render() {
@@ -18,12 +16,9 @@ class A extends React.Component {
                         activeClassName: 'active'
                     },
                     React.createElement("i", {
-                        className: this.props.icon
+                        className: this.props.icon|| 'fa fa-home'
                     }),
-                    React.createElement("span", {}, this.props.title),
-                    React.createElement('i', {
-                        className: 'fa fa-angle-right'
-                    })
+                    React.createElement("span", {}, this.props.title)
                 ),
                 this.props.children
             )
@@ -78,18 +73,7 @@ class Sidebar extends React.Component {
         }
     }
     componentDidMount() {
-        // var url = 'http://www.mycms.com/react/sidebar';
-        // request.get(url)
-        //     .end(function(err, res) {
-        //         console.log(res);
-        //         if (err) throw err;
-        //         var data = JSON.parse(res.text);
-        //         console.log(data);
-        //         this.setState({
-        //             menu: data
-        //         });
-        //     }.bind(this))
-        let filter = {
+        let filter = { 
             where: {
                 state: 1
             },

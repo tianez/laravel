@@ -8,7 +8,7 @@ const {
     Radio,
     Checkbox,
     Upload,
-    Range,
+    Range, 
     Button,
     Hidden
 } = require('../components/forms/index')
