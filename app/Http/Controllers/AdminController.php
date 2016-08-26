@@ -30,7 +30,6 @@ class AdminController extends Controller {
             $res['state'] = 'ok';
             $res['data'] =  Auth::user();
         } else {
-            $res['state'] = 'error';
             $res['msg'] = '用户名或密码错误！';
         }
         return response()->json($res);
